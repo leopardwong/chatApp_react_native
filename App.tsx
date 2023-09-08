@@ -6,6 +6,7 @@ import Details from './app/screens/Details';
 import { useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
+import Signup from './app/screens/Signup';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,11 +14,20 @@ const InsideStack = createNativeStackNavigator();
 
 function InsideLayout(){
   return(
-    <InsideStack.Navigator>
-      <Stack.Screen name='my todos' component={List} />
+    <Stack.Navigator initialRouteName= "Lists">
+      <Stack.Screen name='Lists' component={List} />
       <Stack.Screen name='details' component={Details} />
-    </InsideStack.Navigator>
-  )
+    </Stack.Navigator>
+  );
+}
+
+function AuthStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='Login' component={Login} />
+      <Stack.Screen name='Signup' component={Signup} />
+    </Stack.Navigator>
+  );
 }
 
 export default function App() {
@@ -30,14 +40,15 @@ export default function App() {
   },[])
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
+      {user ? <InsideLayout /> : <AuthStack />}
+      {/* <Stack.Navigator initialRouteName='Login'>
         {user? (
           <Stack.Screen name="Inside" component={InsideLayout} options={{headerShown:false}}/>
         ):(
           <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
           
         )}  
-      </Stack.Navigator>
+      </Stack.Navigator> */}
     </NavigationContainer>
   );
 }

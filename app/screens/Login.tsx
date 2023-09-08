@@ -2,10 +2,13 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, ActivityIndicator, Button, KeyboardAvoidingView } from 'react-native';
-import { FIREBASE_AUTH } from '../../../FirebaseConfig';
+import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
+import SignUpScreen from './SignUpScreen';
 const Stack = createNativeStackNavigator();
 // create a component
+
+
 
 const Login = () => {
   const [email,setEmail] = useState('');
@@ -13,6 +16,7 @@ const Login = () => {
   const [loading,setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
 
+  //login 
   const signIn =async () => {
     setLoading(true);
     try{
@@ -27,6 +31,7 @@ const Login = () => {
     }
   }
 
+  //create account
   const signUp =async () => {
     setLoading(true);
     try{
@@ -49,7 +54,7 @@ const Login = () => {
         { loading? <ActivityIndicator size="large" color="#0000ff"/>
         :<>
           <Button title='Login' onPress={signIn}/>
-          <Button title='Sign Up' onPress={signUp}/>
+          <Button title='Sign Up' onPress={SignUpScreen}/>
         </>}
       </KeyboardAvoidingView>
     </View>

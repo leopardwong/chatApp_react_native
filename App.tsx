@@ -1,8 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from './assets/app/screens/Login';
-import List from './assets/app/screens/List';
-import Details from './assets/app/screens/Details';
+import Login from './app/screens/Login';
+import List from './app/screens/List';
+import Details from './app/screens/Details';
 import { useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
@@ -35,6 +35,7 @@ export default function App() {
           <Stack.Screen name="Inside" component={InsideLayout} options={{headerShown:false}}/>
         ):(
           <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
+          
         )}  
       </Stack.Navigator>
     </NavigationContainer>

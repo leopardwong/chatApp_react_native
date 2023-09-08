@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
 import Signup from './app/screens/Signup';
+import Chat from './app/screens/Chat';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ function InsideLayout(){
     <Stack.Navigator initialRouteName= "Lists">
       <Stack.Screen name='Lists' component={List} />
       <Stack.Screen name='details' component={Details} />
+      <Stack.Screen name='Chat' component={Chat} />
     </Stack.Navigator>
   );
 }

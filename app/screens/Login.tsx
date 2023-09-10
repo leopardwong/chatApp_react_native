@@ -5,16 +5,15 @@ import { View, Text, StyleSheet, TextInput, ActivityIndicator, Button, KeyboardA
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 import { NavigationProp } from '@react-navigation/native';
+import { RouterProps } from './RouterProps';
 const Stack = createNativeStackNavigator();
 // create a component
 
 
-interface LoginProps {
-  navigation: NavigationProp<any,any>;
-}
 
 
-const Login = ({navigation}:LoginProps ) => {
+
+const Login = ({navigation}:RouterProps ) => {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [loading,setLoading] = useState(false);
@@ -35,20 +34,6 @@ const Login = ({navigation}:LoginProps ) => {
     }
   }
 
-  //create account
-  const signUp =async () => {
-    setLoading(true);
-    try{
-      const response = await createUserWithEmailAndPassword(auth,email,password);
-      console.log(response);
-      alert('Check Your email')
-    }catch(error:any){
-      console.log(error);
-      alert('registration fail: ' +error.message);
-    }finally{
-      setLoading(false);
-    }
-  }
   const onHandleLogin = () => {
     if (email !== "" && password !== "") {
       signInWithEmailAndPassword(auth, email, password)
@@ -58,17 +43,6 @@ const Login = ({navigation}:LoginProps ) => {
   };
 
   return (
-    // <View style={style.container}>
-    //   <KeyboardAvoidingView behavior='padding'>
-    //     <TextInput value={email} style={style.input} placeholder="Email" autoCapitalize="none" onChangeText={(text)=>setEmail(text)}></TextInput>
-    //     <TextInput secureTextEntry={true} value={password} style={style.input} placeholder="Password" autoCapitalize="none" onChangeText={(text)=>setPassword(text)}></TextInput>
-    //     { loading? <ActivityIndicator size="large" color="#0000ff"/>
-    //     :<>
-    //       <Button title='Login' onPress={signIn}/>
-    //       <Button title='Sign Up' onPress={signUp}/>
-    //     </>}
-    //   </KeyboardAvoidingView>
-    // </View>
     <View style={styles.container}>
       <View style={styles.whiteSheet} />
       <SafeAreaView style={styles.form}>
@@ -79,7 +53,6 @@ const Login = ({navigation}:LoginProps ) => {
           autoCapitalize="none"
           keyboardType="email-address"
           textContentType="emailAddress"
-          autoFocus={true}
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
@@ -119,7 +92,7 @@ const Login = ({navigation}:LoginProps ) => {
           <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
             <Text
               style={{
-                color: "#f57c00",
+                color: "#839D8E",
                 fontWeight: "600",
                 fontSize: 14,
               }}
@@ -159,7 +132,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: "orange",
+    color: "#839D8E",
     alignSelf: "center",
     paddingBottom: 24,
   },
@@ -192,7 +165,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   button: {
-    backgroundColor: '#f57c00',
+    backgroundColor: '#839D8E',
     height: 58,
     borderRadius: 10,
     justifyContent: 'center',

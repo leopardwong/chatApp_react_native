@@ -12,21 +12,37 @@ import {
 } from "react-native";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
+import { RouterProps } from './RouterProps';
 
-interface SignupProps {
-  navigation: any; // You can provide a more specific type for the navigation prop
-}
 
-const Signup = ({navigation}:SignupProps ) => {
+
+const Signup = ({navigation}:RouterProps ) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const auth = FIREBASE_AUTH;
+  const [loading,setLoading] = useState(false);
+
+  const HandlingSignup =async () => {
+    setLoading(true);
+    try{
+      const response = await createUserWithEmailAndPassword(auth,email,password);
+      console.log(response);
+      alert('Check Your email')
+    }catch(error:any){
+      console.log(error);
+      alert('registration fail: ' +error.message);
+    }finally{
+      setLoading(false);
+    }
+  }
 
   const onHandleSignup = () => {
     if (email !== '' && password !== '') {
       createUserWithEmailAndPassword(auth, email, password)
         .then(() => console.log('Signup success'))
         .catch((err) => Alert.alert("Signup error", err.message));
+    }else{
+      alert('Signup success')
     }
   };
 
@@ -41,7 +57,6 @@ const Signup = ({navigation}:SignupProps ) => {
           autoCapitalize="none"
           keyboardType="email-address"
           textContentType="emailAddress"
-          autoFocus={true}
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
@@ -61,7 +76,7 @@ const Signup = ({navigation}:SignupProps ) => {
         <View style={{ marginTop: 20, flexDirection: 'row', alignItems: 'center', alignSelf: 'center' }}>
           <Text style={{ color: 'gray', fontWeight: '600', fontSize: 14 }}>Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text style={{ color: '#f57c00', fontWeight: '600', fontSize: 14 }}> Log In</Text>
+            <Text style={{ color: '#839D8E', fontWeight: '600', fontSize: 14 }}> Log In</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -78,7 +93,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: "orange",
+    color: "#839D8E",
     alignSelf: "center",
     paddingBottom: 24,
   },
@@ -111,7 +126,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   button: {
-    backgroundColor: '#f57c00',
+    backgroundColor: '#839D8E',
     height: 58,
     borderRadius: 10,
     justifyContent: 'center',

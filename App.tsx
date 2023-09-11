@@ -11,12 +11,13 @@ import SeniorProfile from './app/screens/SeniorProfile';
 import Home from './app/screens/Home';
 import List from './app/screens/List';
 import Setting from './app/screens/Setting';
+import SignupChoose from './app/screens/SignupChoose';
 
 const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+function BottomBar() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -36,12 +37,12 @@ function MyTabs() {
       />
       {/* base on the type of login use to deplay which profile */}
       <Tab.Screen
-        name="List"
+        name="Chat"
         component={List}
         options={{
-          tabBarLabel: 'List',
+          tabBarLabel: 'Chat',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={size} />
+            <MaterialCommunityIcons name="chat-processing-outline" color={color} size={size} />
           ),
         }}
       />
@@ -56,12 +57,12 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Setting"
+        name="Menu"
         component={Setting}
         options={{
-          tabBarLabel: 'Setting',
+          tabBarLabel: 'Menu',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <MaterialCommunityIcons name="menu" color={color} size={size} />
           ),
         }}
       />
@@ -75,7 +76,7 @@ function AuthStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name='Login' component={Login} />
-      <Stack.Screen name='Signup' component={Signup} />
+      <Stack.Screen name='Signup' component={SignupChoose} />
     </Stack.Navigator>
   );
 }
@@ -90,7 +91,7 @@ export default function App() {
   },[])
   return (
     <NavigationContainer>
-      {user ? <MyTabs /> : <AuthStack />}
+      {user ? <BottomBar/> : <AuthStack />}
     </NavigationContainer>
   );
 }

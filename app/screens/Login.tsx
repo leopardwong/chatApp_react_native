@@ -44,7 +44,6 @@ const Login = ({navigation}:RouterProps ) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.whiteSheet} />
       <SafeAreaView style={styles.form}>
         <Text style={styles.title}>Log In</Text>
         <TextInput
@@ -127,7 +126,7 @@ const Login = ({navigation}:RouterProps ) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#FEEADA",
   },
   title: {
     fontSize: 36,

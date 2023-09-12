@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TextInput, Dimensions, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { RouterProps } from './RouterProps';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -14,30 +15,34 @@ const boxHeight = (windowHeight * boxHeightPercentage) / 100;
 const boxColor = '#839D8E'; // Set the color for both boxes
 
 
-const SignupChoose = () => {
+const SignupChoose = ({navigation}:RouterProps ) => {
 
 
   const handleBoxPress = () => {
     // Handle the box press here
-    alert('Box Clicked!');
+    navigation.navigate("Signup");
   };
 
   const handleBackButtonPress = () => {
     // Handle the back button press here
-    alert('Back Button Clicked!');
+    navigation.goBack();
   };
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleBackButtonPress} style={styles.backButton}>
-        <Text>Back</Text>
-      </TouchableOpacity>
       <SafeAreaView style={styles.form}>
+        <TouchableOpacity onPress={handleBackButtonPress} style={styles.backButton}>
+          <Text>Back</Text>
+        </TouchableOpacity>
         <Text style={styles.title}>Log In</Text>
         <TouchableOpacity onPress={handleBoxPress}>
-         <View style={styles.box}></View>
+         <View style={styles.box}>
+            <Text style={styles.boxText}>Care Giver</Text>
+         </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleBoxPress}>
-         <View style={styles.box}></View>
+         <View style={styles.box}>
+            <Text style={styles.boxText}>Senior</Text>
+         </View>
         </TouchableOpacity>
       </SafeAreaView>
     
@@ -50,13 +55,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FEEADA",
     flexDirection: 'column',
-    justifyContent: 'center', // Align vertically in the center
+    justifyContent: 'center', 
     alignItems: 'center',
   },
   backButton: {
     position: 'absolute',
-    top: 70, // Adjust the top position as needed
-    left: 70, // Adjust the left position as needed
+    top: 40, 
+    left: 20, 
   },
   title: {
     fontSize: 36,
@@ -107,6 +112,12 @@ const styles = StyleSheet.create({
     backgroundColor: boxColor,
     marginBottom: 20,
     borderRadius: 10,
+    justifyContent: 'center', 
+    alignItems: 'center',     
+  },
+  boxText: {
+    fontWeight: 'bold', 
+    textAlign: 'center', 
   },
 });
 

@@ -88,7 +88,7 @@ const Login = ({navigation}:RouterProps ) => {
           >
             Don't have an account?{" "}
           </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+          <TouchableOpacity onPress={() => navigation.navigate("SignupChoose")}>
             <Text
               style={{
                 color: "#839D8E",

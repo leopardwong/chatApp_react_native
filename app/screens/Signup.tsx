@@ -45,11 +45,18 @@ const Signup = ({navigation}:RouterProps ) => {
       alert('Signup success')
     }
   };
+  const handleBackButtonPress = () => {
+    // Handle the back button press here
+    navigation.goBack();
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.whiteSheet} />
       <SafeAreaView style={styles.form}>
+        <TouchableOpacity onPress={handleBackButtonPress} style={styles.backButton}>
+          <Text>Back</Text>
+        </TouchableOpacity>
         <Text style={styles.title}>Sign Up</Text>
         <TextInput
           style={styles.input}
@@ -132,6 +139,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 40,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 40, // Adjust the top position as needed
+    left: 20, // Adjust the left position as needed
   },
 });
 
